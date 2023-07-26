@@ -1,5 +1,3 @@
-'use client';
-
 import ChatInput from "@/components/chat-input";
 import ChatMessage from "@/components/chat-message";
 import ConfigInputs from "@/components/config";
@@ -19,6 +17,7 @@ export default function RootPage() {
         <div className="w-1/2">
           {messages.map((message: ChatMessageModel) => (
             <ChatMessage
+              key={message.id}
               role={message.role}
               text={message.text}
             />

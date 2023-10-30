@@ -1,4 +1,5 @@
 "use client";
+import store from "@/store/redux-store";
 import { useState } from "react";
 
 function updateApiKey(changeEvent: React.ChangeEvent<HTMLInputElement>): void {
@@ -6,7 +7,10 @@ function updateApiKey(changeEvent: React.ChangeEvent<HTMLInputElement>): void {
 
   const apiKey: string = changeEvent.target.value;
 
-  console.log(apiKey);
+  store.dispatch({
+    type: "updateApiKey",
+    payload: apiKey,
+  });
 }
 
 function updateGptModel(
@@ -15,13 +19,15 @@ function updateGptModel(
   if (changeEvent.target === null) return;
 
   const gptModel: string = changeEvent.target.value;
-
-  console.log(gptModel);
+  
+  store.dispatch({
+    type: "UPDATE_GPT_MODEL",
+    payload: gptModel,
+  });
 }
 
-
-export default function ConfigInputs() {
-  let [isConfigShown, toggleConfig] = useState(true);
+export default function ConfigInputs(): JSX.Element {
+  const [isConfigShown, toggleConfig] = useState(true);
 
   return (
     <div className="fixed bg-gray-800 w-96 p-3 rounded-r rounded-b m-2">
@@ -59,8 +65,8 @@ export default function ConfigInputs() {
             <option value="gpt-4">
               GPT 4
             </option>
-            <option value="gpt-3.5">GPT 3.5</option>
-            <option value="gpt-3">GPT 3</option>
+            <option value="gpt-3.5-turbo">GPT 3.5</option>
+            <option value="davinci">GPT 3</option>
           </select>
       </div>
       </div>

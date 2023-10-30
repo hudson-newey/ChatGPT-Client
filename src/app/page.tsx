@@ -1,7 +1,7 @@
-import RootPage from "@/pages/root";
+import ChatPage from "@/pages/chat";
 
 export default function Home() {
   return (
-    <RootPage />
+    <ChatPage />
   );
 }

@@ -8,6 +8,8 @@ I also made this client so I could learn how to use [pnpm](https://github.com/pn
 
 ## To Run
 
+Modify the `environment.example.ts` file and fill in your information and rename to `environment.ts`
+
 ```sh
 > pnpm dev
 $

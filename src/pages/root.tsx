@@ -8,13 +8,13 @@ export default function RootPage() {
       <ConfigInputs />
 
       <div className="flex items-center justify-center">
-        <div className="w-1/2">
+        <div className="w-3/5">
           <ChatHistory />
         </div>
       </div>
 
-      <div className="flex items-center justify-center">
-        <ChatInput />
+      <div className="fixed bottom-20 flex items-center justify-center w-full">
+          <ChatInput />
       </div>
     </div>
   );

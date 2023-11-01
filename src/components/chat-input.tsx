@@ -1,5 +1,3 @@
-"use client";
-
 import { ChatMessageModel } from "@/models/chat-message";
 import { submitApiQuery } from "@/services/openai";
 import { ChatCompletionMessage } from "openai/resources/index.mjs";

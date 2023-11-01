@@ -5,12 +5,12 @@ import ConfigInputs from "@/components/config";
 import { ChatMessageModel } from "@/models/chat-message";
 import { useState } from "react";
 
-const fakeMessages: ChatMessageModel[] = [
+const initialMessages: ChatMessageModel[] = [
   new ChatMessageModel("assistant", "Hello, how can I help you?"),
 ];
 
 export default function ChatPage() {
-  const [chatMessages, setChatMessages] = useState<ChatMessageModel[]>(fakeMessages);
+  const [chatMessages, setChatMessages] = useState<ChatMessageModel[]>(initialMessages);
 
   return (
     <div className="bg-gray-900 text-gray-50 h-screen">

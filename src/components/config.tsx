@@ -26,6 +26,10 @@ function updateGptModel(
   });
 }
 
+function apiKey(): string {
+  return store.getState().config.apiKey;
+}
+
 export default function ConfigInputs(): JSX.Element {
   const [isConfigShown, toggleConfig] = useState(true);
 
@@ -47,10 +51,11 @@ export default function ConfigInputs(): JSX.Element {
         <div className="mt-5">
           <label htmlFor="api-key">Api Key</label>
           <input
-            type="text"
+            type="password"
             name="api-key"
             className="bg-gray-700 p-1 m-1 rounded"
             onChange={updateApiKey}
+            value={apiKey()}
           />
         </div>
 
@@ -60,7 +65,6 @@ export default function ConfigInputs(): JSX.Element {
             name="model-selector"
             className="bg-gray-700 p-1 m-1 rounded"
             onChange={updateGptModel}
-            defaultValue="gpt-4"
           >
             <option value="gpt-4">
               GPT 4

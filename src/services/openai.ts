@@ -9,21 +9,28 @@ const developmentResponse: ChatCompletionMessage = {
     content: "This is a fake response. To enable real reponses, provide a development key in environment.ts"
 };
 
+const openAi = new OpenAI({
+    apiKey: apiKey(),
+    dangerouslyAllowBrowser: true,
+});
+
+// because of JS hoisting, we don't need to put this function declaration
+// before the openAi object declaration
 function apiKey(): string {
     const envKey: string | undefined = environment.openAiApiKey;
     return envKey ?? store.getState().config.apiKey;
 }
 
-export async function submitApiQuery(query: string, chatHistory: ChatMessageModel[] = []): Promise<ChatCompletionMessage> {
+export async function submitApiQuery(
+    query: string,
+    chatHistory: ChatMessageModel[] = []
+): Promise<ChatCompletionMessage> {
     if (environment.development) {
         return developmentResponse;
     }
-    
-    const openAi = new OpenAI({
-        apiKey: apiKey(),
-        dangerouslyAllowBrowser: true,
-    });
-    
+
+    console.log(openAi);
+
     const chatCompletion: ChatCompletion = await openAi.chat.completions.create(
         {
             model: environment.openAiModel as any,

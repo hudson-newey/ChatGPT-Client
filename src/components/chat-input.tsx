@@ -1,42 +1,17 @@
 import { ChatMessageModel } from "@/models/chat-message";
-import { submitApiQuery } from "@/services/openai";
-import { ChatCompletionMessage } from "openai/resources/index.mjs";
 
 interface ChatInputProps {
-    submitCallback: (value: any) => any;
-    currentMessages: ChatMessageModel[];
+  submitCallback: (value: string) => void;
 }
 
 export default function ChatInput(props: ChatInputProps): JSX.Element {
-  async function submitQuery(): Promise<void> {
-      const userInputElement = document.getElementById("chat-input") as HTMLInputElement;
-    
-      const userQuery: string = userInputElement.value;
-    
-      // clear the chat input box
-      userInputElement.value = "";
+  function submitQuery(): void {
+    const userInputElement = document.getElementById("chat-input") as HTMLInputElement;
 
-      // get the current chat messages
-      const currentMessages: ChatMessageModel[] = props.currentMessages;
+    const userQuery: string = userInputElement.value;
+    props.submitCallback(userQuery);
 
-      const newMessages: ChatMessageModel[] = [
-        ...currentMessages,
-        new ChatMessageModel("user", userQuery),
-      ];
-
-      // add the user's message to the chat
-      props.submitCallback(newMessages);
-
-      const modelResponse: ChatCompletionMessage = await submitApiQuery(
-        userQuery,
-        currentMessages
-      );
-
-      // add the model's response to the chat
-      props.submitCallback([
-        ...newMessages,
-        new ChatMessageModel(modelResponse.role, modelResponse.content ?? "An error occured."),
-      ]);
+    userInputElement.value = "";
   }
 
   return (
